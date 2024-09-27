@@ -61,7 +61,7 @@ const RelationCard = () => {
     const containerRef = useRef(null);
 
     // URL du backend
-    const API_URL = 'http://localhost:5000'; // Remplacez par l'URL de votre backend si nécessaire
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000'; // Remplacez par l'URL de votre backend si nécessaire
 
     // Liste des couleurs possibles pour les tags
     const defaultColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
