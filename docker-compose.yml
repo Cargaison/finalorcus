@@ -14,6 +14,7 @@ services:
     networks:
       - app-network
     environment:
+      - REACT_APP_API_URL=http://134.209.239.6:5000
       - REACT_APP_EVENT_REGISTRY_API_KEY=${REACT_APP_EVENT_REGISTRY_API_KEY}
     volumes:
       - ./orcus/.env:/app/.env
