@@ -1,0 +1,214 @@
+.relation-card-container {
+    background-color: #1d1d1d;
+    width: 1000px;
+    height:800px;
+    position: relative;
+    margin: auto;
+    border: 1px solid white;
+}
+/* RelationCard.css */
+.center-coordinates {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 10; /* Assure que le texte est au-dessus des autres éléments */
+}
+
+.center-coordinates span {
+    display: block;
+}
+
+/* Animation de fondu */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.point {
+    opacity: 0; /* Commence invisible */
+    animation: fadeIn 1s forwards; /* Animation de 1 seconde */
+}
+/* RelationCard.css */
+
+/* Animation de fondu pour les lignes */
+@keyframes fadeInLine {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.line {
+    opacity: 0; /* Commence invisible */
+    animation: fadeInLine 1s forwards;
+}
+
+.controls {
+    margin-left: 10%;
+    margin-top: 20px;
+}
+
+.notes-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 250px; /* Réduction de la largeur */
+    background-color: rgba(29, 29, 29, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    border: 1px solid white;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform-origin: top;
+}
+
+.notes-panel.closed {
+    transform: scaleY(0);
+    opacity: 0;
+}
+
+.notes-panel.open {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+.notes-panel textarea {
+    width: 80%; /* Réduction de la largeur à 80% du panneau */
+    margin: 10px auto; /* Centrage horizontal */
+    display: block; /* Nécessaire pour que le margin auto fonctionne */
+    height: 100px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.notes-panel img {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* Style des boutons */
+button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.read-only {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+}
+/* Styles pour les modales */
+.color-selection {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.color-option.selected {
+    border-color: white;
+}
+
+.tag-selection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.tag-option {
+    padding: 10px;
+    margin-bottom: 5px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.tag-option:hover {
+    opacity: 0.8;
+}
+
+/* Ajustements pour les tags dans le panneau de notes */
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    color: white;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+/* Ajustements pour les boutons dans le panneau de notes */
+.notes-panel button {
+    margin-top: 10px;
+    width: 100%;
+}
+/* Style pour le bouton actif */
+button.active {
+    background-color: rgba(255, 0, 0, 0.2);
+    border-color: red;
+    color: red;
+}
+
+button.active:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+.controls {
+    position: absolute;
+    top: 100%;
+
+    background-color: rgba(29, 29, 29, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.controls button {
+    padding: 8px 12px;
+    background-color: #3a3a3a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.controls button:hover {
+    background-color: #555;
+}

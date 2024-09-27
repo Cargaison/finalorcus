@@ -1,0 +1,9 @@
+/* index.css ou App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1d1d1d; /* Fond noir */
+  color: #fff; /* Texte en blanc pour la lisibilité */
+  font-family: Arial, sans-serif;
+}
