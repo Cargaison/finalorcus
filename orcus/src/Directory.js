@@ -21,9 +21,9 @@ const Directory = () => {
         const fetchData = async () => {
             try {
                 const [pointsRes, tagsRes, notesRes] = await Promise.all([
-                    axios.get(`${API_URL}/points`),
-                    axios.get(`${API_URL}/tags`),
-                    axios.get(`${API_URL}/notes`),
+                    axios.get(`http://134.209.239.6:5000/points`),
+                    axios.get(`http://134.209.239.6:5000/tags`),
+                    axios.get(`http://134.209.239.6:5000/notes`),
                 ]);
                 setPoints(pointsRes.data);
                 setTags(tagsRes.data);
@@ -71,7 +71,7 @@ const Directory = () => {
 
         try {
             // Créer le nouveau point
-            const newPointRes = await axios.post(`${API_URL}/points`, {
+            const newPointRes = await axios.post(`http://134.209.239.6:5000/points`, {
                 type: 'person',
                 x: 100, // Vous pouvez définir des coordonnées par défaut ou aléatoires
                 y: 100,
@@ -84,7 +84,7 @@ const Directory = () => {
 
             // Créer les connexions avec les points sélectionnés
             for (const pointId of selectedConnections) {
-                await axios.post(`${API_URL}/connections`, {
+                await axios.post(`http://134.209.239.6:5000/connections`, {
                     from: newPoint._id,
                     to: pointId,
                 });
