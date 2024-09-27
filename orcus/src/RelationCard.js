@@ -85,10 +85,10 @@ const RelationCard = () => {
         const fetchData = async () => {
             try {
                 const [pointsRes, connectionsRes, notesRes, tagsRes] = await Promise.all([
-                    axios.get(`${API_URL}/points`),
-                    axios.get(`${API_URL}/connections`),
-                    axios.get(`${API_URL}/notes`),
-                    axios.get(`${API_URL}/tags`),
+                    axios.get(`$http://134.209.239.6:5000/points`),
+                    axios.get(`$http://134.209.239.6:5000/connections`),
+                    axios.get(`$http://134.209.239.6:5000/notes`),
+                    axios.get(`$http://134.209.239.6:5000/tags`),
                 ]);
 
                 const loadedPoints = pointsRes.data;
@@ -160,7 +160,7 @@ const RelationCard = () => {
                 setPoints(prevPoints => [...prevPoints, node]);
 
                 // Optionnel : Envoyer au backend si nécessaire
-                axios.post(`${API_URL}/points`, node)
+                axios.post(`$http://134.209.239.6:5000/points`, node)
                     .then(res => {
                         // Mettre à jour le point avec l'ID retourné par le backend
                         setPoints(prevPoints => prevPoints.map(p => p.name === node.name ? res.data : p));
@@ -176,7 +176,7 @@ const RelationCard = () => {
     const createTag = async () => {
         if (newTagName) {
             try {
-                const res = await axios.post(`${API_URL}/tags`, {
+                const res = await axios.post(`$http://134.209.239.6:5000/tags`, {
                     name: newTagName,
                     color: newTagColor,
                 });
@@ -200,7 +200,7 @@ const RelationCard = () => {
                         ...point,
                         tags: [...(point.tags || []), selectedTagId],
                     };
-                    await axios.put(`${API_URL}/points/${point._id}`, updatedPoint);
+                    await axios.put(`$http://134.209.239.6:5000/points/${point._id}`, updatedPoint);
                     updatedPoints.push(updatedPoint);
                 }
                 setPoints(prevPoints =>
@@ -235,7 +235,7 @@ const RelationCard = () => {
             };
 
             try {
-                const res = await axios.post(`${API_URL}/points`, newPoint);
+                const res = await axios.post(`$http://134.209.239.6:5000/points`, newPoint);
                 setPoints(prevPoints => [...prevPoints, res.data]);
 
                 // Attribuer un délai fixe pour l'animation du nouveau point
@@ -284,7 +284,7 @@ const RelationCard = () => {
             // Mettre à jour la position du point dans la base de données
             const updatedPoint = newPoints.find(p => p._id === dragging);
             try {
-                await axios.put(`${API_URL}/points/${dragging}`, {
+                await axios.put(`$http://134.209.239.6:5000/points/${dragging}`, {
                     x: updatedPoint.x,
                     y: updatedPoint.y,
                 });
@@ -316,7 +316,7 @@ const RelationCard = () => {
         if (deleteMode) {
             // Supprimer le point
             try {
-                await axios.delete(`${API_URL}/points/${point._id}`);
+                await axios.delete(`$http://134.209.239.6:5000/points/${point._id}`);
                 setPoints(points.filter(p => p._id !== point._id));
 
                 // Supprimer les connexions associées
@@ -327,7 +327,7 @@ const RelationCard = () => {
 
                 // Supprimer les notes associées
                 if (notes.points[point._id]) {
-                    await axios.delete(`${API_URL}/notes/${notes.points[point._id]._id}`);
+                    await axios.delete(`$http://134.209.239.6:5000/notes/${notes.points[point._id]._id}`);
                     const { [point._id]: _, ...updatedPointNotes } = notes.points;
                     setNotes(prevNotes => ({ ...prevNotes, points: updatedPointNotes }));
                 }
@@ -367,7 +367,7 @@ const RelationCard = () => {
                     if (existingConnection) {
                         // Supprimer la connexion
                         try {
-                            await axios.delete(`${API_URL}/connections/${existingConnection._id}`);
+                            await axios.delete(`$http://134.209.239.6:5000/connections/${existingConnection._id}`);
                             setConnections(connections.filter(c => c._id !== existingConnection._id));
                         } catch (error) {
                             console.error("Erreur lors de la suppression de la connexion", error);
@@ -375,7 +375,7 @@ const RelationCard = () => {
                     } else {
                         // Ajouter une nouvelle connexion
                         try {
-                            const res = await axios.post(`${API_URL}/connections`, {
+                            const res = await axios.post(`$http://134.209.239.6:5000/connections`, {
                                 from: selectedPoints[0]._id,
                                 to: point._id
                             });
@@ -401,12 +401,12 @@ const RelationCard = () => {
         if (deleteMode) {
             // Supprimer la connexion
             try {
-                axios.delete(`${API_URL}/connections/${connection._id}`);
+                axios.delete(`$http://134.209.239.6:5000/connections/${connection._id}`);
                 setConnections(connections.filter(c => c._id !== connection._id));
 
                 // Supprimer les notes associées
                 if (notes.connections[connection._id]) {
-                    axios.delete(`${API_URL}/notes/${notes.connections[connection._id]._id}`);
+                    axios.delete(`$http://134.209.239.6:5000/notes/${notes.connections[connection._id]._id}`);
                     const { [connection._id]: _, ...updatedConnectionNotes } = notes.connections;
                     setNotes(prevNotes => ({ ...prevNotes, connections: updatedConnectionNotes }));
                 }
@@ -429,10 +429,10 @@ const RelationCard = () => {
         try {
             if (notes.points[_id]) {
                 // Mettre à jour la note existante
-                await axios.put(`${API_URL}/notes/${notes.points[_id]._id}`, updatedNote);
+                await axios.put(`$http://134.209.239.6:5000/notes/${notes.points[_id]._id}`, updatedNote);
             } else {
                 // Créer une nouvelle note
-                const res = await axios.post(`${API_URL}/notes`, {
+                const res = await axios.post(`$http://134.209.239.6:5000/notes`, {
                     pointId: _id,
                     text: e.target.value,
                     image: '',
@@ -458,10 +458,10 @@ const RelationCard = () => {
         try {
             if (notes.connections[connectionId]) {
                 // Mettre à jour la note existante
-                await axios.put(`${API_URL}/notes/${notes.connections[connectionId]._id}`, updatedNote);
+                await axios.put(`$http://134.209.239.6:5000/notes/${notes.connections[connectionId]._id}`, updatedNote);
             } else {
                 // Créer une nouvelle note
-                const res = await axios.post(`${API_URL}/notes`, {
+                const res = await axios.post(`$http://134.209.239.6:5000/notes`, {
                     connectionId: connectionId,
                     text: e.target.value,
                     image: '',
