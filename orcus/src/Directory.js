@@ -15,7 +15,7 @@ const Directory = () => {
     const [newPersonName, setNewPersonName] = useState('');
     const [selectedConnections, setSelectedConnections] = useState([]);
 
-    const API_URL = 'http://localhost:5000'; // URL de votre backend
+    const API_URL = 'http://134.209.239.6:5000'; // URL de votre backend
 
     useEffect(() => {
         const fetchData = async () => {
