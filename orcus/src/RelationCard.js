@@ -170,7 +170,7 @@ const RelationCard = () => {
                     });
             }
         });
-    }, [nodes, points, http://134.209.239.6:5000]);
+    }, [nodes, points, 'http://134.209.239.6:5000']);
 
     // Fonction pour créer un nouveau tag
     const createTag = async () => {
